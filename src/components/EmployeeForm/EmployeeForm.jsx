@@ -21,7 +21,7 @@ const EmployeeForm = () => {
           "http://localhost:3000/api/v1/employee",
           employeeData
         );
-        console.log("Response from API:", response.data);
+        console.log("Response from API post:", response.data);
       }
 
       // You can show success message or do further actions here
@@ -37,6 +37,7 @@ const EmployeeForm = () => {
     email: employee?.email || "",
     phone: employee?.phone || "",
     dateOfBirth: employee?.dateOfBirth || "",
+    profilePicture: employee?.profilePicture || "",
     address: {
       street: employee?.address?.street || "",
       city: employee?.address?.city || "",
@@ -210,10 +211,19 @@ const EmployeeForm = () => {
           onClick={() => navigate("/employeelist")}
           className="w-[200px] p-2 rounded-md text-white cursor-pointer bg-blue-700"
         >
-          Get Employee List
+          Employee List
         </button>
       </div>
-
+      <input
+        type="file"
+        accept="image/*"
+        onChange={(e) =>
+          setFormData((prev) => ({
+            ...prev,
+            profilePicture: e.target.files[0],
+          }))
+        }
+      />
       <form onSubmit={handleSubmit}>
         {/* Basic Information */}
         <div className="mb-8">

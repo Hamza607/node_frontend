@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { IoIosEye } from "react-icons/io";
 import { MdEdit } from "react-icons/md";
 import { FaTrash } from "react-icons/fa";
+import { IoArrowBackOutline } from "react-icons/io5";
 
 export default function UserProfileList() {
   const [employees, setEmployees] = useState([]);
@@ -42,6 +43,12 @@ export default function UserProfileList() {
   return (
     <>
       <div className="container mx-auto px-4 py-8">
+        <h1
+          className="text-medium mb-6 flex items-center cursor-pointer gap-2"
+          onClick={() => navigate("/employee")}
+        >
+          <IoArrowBackOutline /> Back{" "}
+        </h1>
         <h1 className="text-2xl font-bold mb-6">Employee Directory</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

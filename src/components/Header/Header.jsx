@@ -21,12 +21,6 @@ export default function Header() {
             BackendMaster
           </div>
           <div className="hidden md:flex space-x-10">
-            <Link to="#features" className="hover:text-blue-400 transition">
-              Features
-            </Link>
-            <Link to="#courses" className="hover:text-blue-400 transition">
-              Courses
-            </Link>
             <Link to="/employee" className="hover:text-blue-400 transition">
               Add Employee
             </Link>
@@ -34,7 +28,10 @@ export default function Header() {
               Employee List
             </Link>
             <Link to="/todocard" className="hover:text-blue-400 transition">
-              Add List
+              Todo List
+            </Link>
+            <Link to="/notes" className="hover:text-blue-400 transition">
+              Notes
             </Link>
           </div>
 

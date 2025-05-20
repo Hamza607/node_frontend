@@ -10,6 +10,7 @@ import { Navigate } from "react-router-dom";
 import EmployeeForm from "../EmployeeForm/EmployeeForm";
 import UserProfileList from "../AllEmployee/UserProfileList";
 import EmployeeProfile from "../EmployeeProfile/EmployeeProfile";
+import Note from "../Notes/Note";
 
 export function ProtectedRoute({ children }) {
   const isAuthenticated = !!localStorage.getItem("token"); // or use context
@@ -54,6 +55,14 @@ export default function Router() {
           element={
             <ProtectedRoute>
               <UserProfileList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/notes"
+          element={
+            <ProtectedRoute>
+              <Note />
             </ProtectedRoute>
           }
         />
