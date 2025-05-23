@@ -11,6 +11,8 @@ import EmployeeForm from "../EmployeeForm/EmployeeForm";
 import UserProfileList from "../AllEmployee/UserProfileList";
 import EmployeeProfile from "../EmployeeProfile/EmployeeProfile";
 import Note from "../Notes/Note";
+import TrainingCourse from "../TrainingCourse/TrainingCourse";
+import CreateCourseForm from "../TrainingCourse/CreateCourseForm";
 
 export function ProtectedRoute({ children }) {
   const isAuthenticated = !!localStorage.getItem("token"); // or use context
@@ -63,6 +65,22 @@ export default function Router() {
           element={
             <ProtectedRoute>
               <Note />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/training-course"
+          element={
+            <ProtectedRoute>
+              <TrainingCourse />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/course-form"
+          element={
+            <ProtectedRoute>
+              <CreateCourseForm />
             </ProtectedRoute>
           }
         />

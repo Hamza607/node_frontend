@@ -33,6 +33,9 @@ export default function Header() {
             <Link to="/notes" className="hover:text-blue-400 transition">
               Notes
             </Link>
+            <Link to="/training-course" className="hover:text-blue-400 transition">
+              Training Course
+            </Link>
           </div>
 
           {token ? (
