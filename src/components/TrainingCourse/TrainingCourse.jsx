@@ -5,6 +5,8 @@ import { toast } from "react-hot-toast";
 import ReactPaginate from "react-paginate";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 export default function TrainingCourse() {
   const [courses, setCourses] = useState([]);
@@ -103,7 +105,7 @@ export default function TrainingCourse() {
           </span>
         </h1>
 
-        {loading ? (
+        {false ? (
           <div className="text-center text-gray-600">Loading...</div>
         ) : (
           <div className="overflow-x-auto">
@@ -191,60 +193,77 @@ export default function TrainingCourse() {
                 </tr>
               </thead>
               <tbody>
-                {courses.map((course) => (
-                  <tr key={course._id} className="hover:bg-gray-100 border-b">
-                    <td className="px-6 py-4 text-sm font-medium text-gray-900">
-                      <img
-                        width={100}
-                        className="h-[100px]"
-                        src={`http://localhost:3000/uploads/${course?.imageUpload}`}
-                        alt=""
-                      />
-                    </td>
-                    <td className="px-6 py-4 text-sm font-medium text-gray-900">
-                      {course.title}
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-700">
-                      {course.description}
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-700">
-                      {course.duration}
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-700">
-                      ${course.price}
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-700">
-                      {course.content_type}
-                    </td>
-                    <td className="px-6 py-4 text-sm">
-                      <span
-                        className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                          course.is_current_user_enrolled
-                            ? "bg-green-100 text-green-700"
-                            : "bg-red-100 text-red-700"
-                        }`}
+                {loading
+                  ? Array(5)
+                      .fill(0)
+                      .map((_, index) => (
+                        <tr key={index}>
+                          {Array(8)
+                            .fill(0)
+                            .map((_, i) => (
+                              <td key={i} className="px-6 py-4 text-sm">
+                                <Skeleton height={20} />
+                              </td>
+                            ))}
+                        </tr>
+                      ))
+                  : courses.map((course) => (
+                      <tr
+                        key={course._id}
+                        className="hover:bg-gray-100 border-b"
                       >
-                        {course.is_current_user_enrolled ? "Yes" : "No"}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 text-sm flex flex-wrap  gap-2">
-                      <button
-                        onClick={() => {
-                          navigate("/course-form", { state: { course } });
-                        }}
-                        className="bg-yellow-400 cursor-pointer hover:bg-yellow-500 text-white text-xs px-3 py-1 rounded-md transition"
-                      >
-                        Edit
-                      </button>
-                      <button
-                        onClick={() => handleDelete(course._id)}
-                        className="bg-red-500 cursor-pointer hover:bg-red-600 text-white text-xs px-3 py-1 rounded-md transition"
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                        <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                          <img
+                            width={100}
+                            className="h-[100px]"
+                            src={`http://localhost:3000/uploads/${course?.imageUpload}`}
+                            alt=""
+                          />
+                        </td>
+                        <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                          {course.title}
+                        </td>
+                        <td className="px-6 py-4 text-sm text-gray-700">
+                          {course.description}
+                        </td>
+                        <td className="px-6 py-4 text-sm text-gray-700">
+                          {course.duration}
+                        </td>
+                        <td className="px-6 py-4 text-sm text-gray-700">
+                          ${course.price}
+                        </td>
+                        <td className="px-6 py-4 text-sm text-gray-700">
+                          {course.content_type}
+                        </td>
+                        <td className="px-6 py-4 text-sm">
+                          <span
+                            className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                              course.is_current_user_enrolled
+                                ? "bg-green-100 text-green-700"
+                                : "bg-red-100 text-red-700"
+                            }`}
+                          >
+                            {course.is_current_user_enrolled ? "Yes" : "No"}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 text-sm flex flex-wrap  gap-2">
+                          <button
+                            onClick={() => {
+                              navigate("/course-form", { state: { course } });
+                            }}
+                            className="bg-yellow-400 cursor-pointer hover:bg-yellow-500 text-white text-xs px-3 py-1 rounded-md transition"
+                          >
+                            Edit
+                          </button>
+                          <button
+                            onClick={() => handleDelete(course._id)}
+                            className="bg-red-500 cursor-pointer hover:bg-red-600 text-white text-xs px-3 py-1 rounded-md transition"
+                          >
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
                 {courses.length === 0 && (
                   <tr>
                     <td
